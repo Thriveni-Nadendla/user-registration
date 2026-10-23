@@ -1,1 +1,2 @@
 # user-registration-page
+welcome
