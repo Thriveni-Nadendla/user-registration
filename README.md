@@ -1,2 +1,2 @@
 # user-registration-page
-welcome
+
