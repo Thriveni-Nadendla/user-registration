@@ -8,11 +8,7 @@ pipeline{
   string defaultValue: 'main', description: 'branch to build', name: 'BRANCH'
 }
     stages{
-        stage('clone repository'){
-            steps{
-                git branch: "${params.BRANCH}", credentialsId: 'github-cred', url: 'git@github.com:Thriveni-Nadendla/user-registration.git'
-            }
-        }
+       
         stage('build application'){
             steps{
                 
