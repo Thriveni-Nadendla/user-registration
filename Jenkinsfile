@@ -1,16 +1,26 @@
-pipeline {
+pipeline{
     agent any
+    tools {
+  maven 'maven'
+}
 
-    stages {
-        stage('Hello') {
-            steps {
-                echo 'Hello World. tghis fisrt stage'
+    parameters {
+  string defaultValue: 'main', description: 'branch to build', name: 'BRANCH'
+}
+    stages{
+        stage('clone repository'){
+            steps{
+                git branch: "${params.BRANCH}", credentialsId: 'github-cred', url: 'git@github.com:Thriveni-Nadendla/user-registration.git'
             }
         }
-        
-        stage('This is 2nd stage') {
-            steps {
-                echo 'This is 2nd stage'
+        stage('build application'){
+            steps{
+                
+                withCredentials([string(credentialsId: 'DB_PASSWORD', variable: 'DB_PASSWORD')]) {
+    sh "mvn clean package"
+    
+}
+                
             }
         }
     }
